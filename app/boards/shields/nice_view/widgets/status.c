@@ -26,6 +26,8 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/keymap.h>
 #include <zmk/wpm.h>
 
+LV_IMG_DECLARE(bongo_idle);
+
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 struct output_status_state {
@@ -86,8 +88,9 @@ static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_st
 
     lv_canvas_draw_text(canvas, 0, 0, CANVAS_SIZE, &label_dsc, output_text);
 
-
-    lv_canvas_draw_rect(canvas, 0, 21, 68, 42, &rect_white_dsc);
+    lv_obj_t *bongo_idle_image = lv_img_create(widget->obj);
+    lv_img_set_src(bongo_idle_image, &bongo_idle);
+    lv_obj_align(bongo_idle_image, NULL, LV_ALIGN_CENTER, 0, 0);
 
     // // Draw WPM
     // lv_canvas_draw_rect(canvas, 0, 21, 68, 42, &rect_white_dsc);
